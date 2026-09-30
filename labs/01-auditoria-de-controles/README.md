@@ -70,13 +70,20 @@ sha256sum saida/evidencias_auditoria.txt | tee saida/evidencias_auditoria.sha256
 
 | Critério | Evidência (comando + resultado) | Conforme? | NC |
 |---|---|---|---|
-| C1 | | | |
-| C2 | | | |
-| C3 | | | |
-| C4 | | | |
+| C1 |awk... → root -> UID 0 e suporte -> UID 0 |NÃO |NC-01 |
+| C2 |awk... → SEM SENHA: suporte |NÃO |NC-02 |
+| C3 |find... → saida/servidor/financeiro/pagamentos.csv |NÃO |NC-03 |
+| C4 |grep... → estagiario2024:... (desligado em 2024) |NÃO |NC-04 |
 
 ## ❓ Perguntas
 1. Qual conta viola dois critérios ao mesmo tempo? Qual o risco?
+A conta identificada nos resultados de C1 e C4. O risco é permitir acesso indevido ao servidor.
 2. Escreva a **NC-01** de forma clara, firme e objetiva (fato, critério e efeito).
+Foi identificada uma conta em desacordo com a política de segurança, aumentando o risco de acesso não autorizado.
 3. Por que a auditoria foi feita numa **cópia** das configurações, e não no servidor em produção?
+Para evitar alterações ou impactos no servidor de produção.
 4. Qual recomendação você faria para cada não conformidade?
+C1: Corrigir o UID da conta.
+C2: Definir senha para a conta.
+C3: Remover escrita para outros usuários.
+C4: Remover contas de funcionários desligados.
